@@ -16,7 +16,7 @@ public class BrandControllerTest extends TestCase {
     public void saveBrandTest() throws Exception {
         Brand brand = new Brand();
         brand.setName("Jeans Guerra");
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(280);
         brand.setUnitSaleAmount(370);
         brand.setPromotionSaleAmount(350);

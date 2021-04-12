@@ -1,6 +1,6 @@
 package com.SistemaGestion.ShowroomX.Model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +26,7 @@ public class Purchases implements Serializable, Comparable<Purchases> {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_BRAND", updatable = false)
-    @JsonManagedReference
+    @JsonBackReference
     private Brand brand;
 
     public Purchases() {

@@ -1,7 +1,7 @@
 package com.SistemaGestion.ShowroomX.Controller;
 
 import com.SistemaGestion.ShowroomX.Model.Client;
-import com.SistemaGestion.ShowroomX.Service.ClientService;
+import com.SistemaGestion.ShowroomX.Service.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping(value = "/client")
 public class ClientController {
 
-    private final ClientService clientService;
+    private final ClientServiceImpl clientService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientServiceImpl clientService) {
         this.clientService = clientService;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,12 +14,13 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class SalesService {
+@Transactional
+public class SalesServiceImpl {
 
     private final ISales dao;
 
     @Autowired
-    public SalesService(ISales dao) {
+    public SalesServiceImpl(ISales dao) {
         this.dao = dao;
     }
 
@@ -30,12 +32,12 @@ public class SalesService {
         return dao.save(sales);
     }
 
-    public Sales update(Sales sales) {
+    public Sales update(Sales sale) {
         //Validate that all fields are completed
-        if (sales.getAmount() == 0 || sales.getPaymentTpye().isEmpty() || sales.getPrice() == 0 || sales.getClient().getIdClient() == 0) {
+        if (sale.getAmount() == 0 || sale.getPaymentTpye().isEmpty() || sale.getPrice() == 0 || sale.getClient().getIdClient() == 0) {
             return null;
         }
-        return dao.save(sales);
+        return dao.save(sale);
     }
 
     public List<Sales> findAll() {

@@ -1,7 +1,7 @@
 package com.SistemaGestion.ShowroomX.Controller;
 
 import com.SistemaGestion.ShowroomX.Model.Brand;
-import com.SistemaGestion.ShowroomX.Service.BrandService;
+import com.SistemaGestion.ShowroomX.Service.BrandServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping(value = "/brand")
 public class BrandController {
 
-    private final BrandService dao;
+    private final BrandServiceImpl dao;
 
     @Autowired
-    public BrandController(BrandService brandService) {
+    public BrandController(BrandServiceImpl brandService) {
         this.dao = brandService;
     }
 
@@ -32,13 +32,12 @@ public class BrandController {
         ResponseEntity responseEntity = new ResponseEntity<>(brandResponse, HttpStatus.OK);
 
         return brandResponse == null ? responseEntityError : responseEntity;
-
     }
 
     @CrossOrigin(origins = "*")
-    @PutMapping(value = "/update", consumes = {"application/json"})
+    @PostMapping(value = "/update", consumes = {"application/json"})
     public ResponseEntity<Brand> update(@RequestBody Brand brand) {
-        Brand brandResponse = dao.save(brand);
+        Brand brandResponse = dao.update(brand);
 
         ResponseEntity responseEntityError = new ResponseEntity("No se pudo actualizar por falta de datos", HttpStatus.BAD_REQUEST);
         ResponseEntity responseEntity = new ResponseEntity<>(brandResponse, HttpStatus.OK);
@@ -61,7 +60,7 @@ public class BrandController {
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/findAll")
     public ResponseEntity<List<Brand>> findAll() {
-        ResponseEntity responseEntity = new ResponseEntity<List<Brand>>(dao.findAll(), HttpStatus.OK);
+        ResponseEntity responseEntity = new ResponseEntity<>(dao.findAll(), HttpStatus.OK);
         System.out.println(responseEntity.getStatusCode());
         return responseEntity;
     }
@@ -78,9 +77,11 @@ public class BrandController {
         return listBrandResponse != null ? responseEntity_OK : responseEntity_NOK;
     }
 
+
+    //Find by Brand with stock equals to Zero
     @CrossOrigin(origins = "*")
-    @GetMapping(value = "/findByStock/{stock}")
-    public ResponseEntity<List<Brand>> findByStock(@PathVariable("stock") Integer stock) {
-        return new ResponseEntity<>(dao.findByStock(stock), HttpStatus.OK);
+    @GetMapping(value = "/findStockZero")
+    public ResponseEntity<List<Brand>> findByStockZero() {
+        return new ResponseEntity<>(dao.findByStockZero(), HttpStatus.OK);
     }
 }

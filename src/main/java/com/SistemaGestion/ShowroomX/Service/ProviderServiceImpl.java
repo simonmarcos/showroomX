@@ -12,14 +12,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProviderService {
-
-    private IProvider dao;
+public class ProviderServiceImpl {
 
     @Autowired
-    public ProviderService(IProvider dao) {
-        this.dao = dao;
-    }
+    private IProvider dao;
+
+//    public ProviderServiceImpl(IProvider dao) {
+//        this.dao = dao;
+//    }
 
     public Provider save(Provider provider) {
         if (provider.getName() == null) {

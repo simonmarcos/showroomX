@@ -1,6 +1,6 @@
 package com.SistemaGestion.ShowroomX.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +28,7 @@ public class Provider implements Serializable {
     //@JoinTable(name = "ProviderBrand", joinColumns = @JoinColumn(name = "FK_PROVIDER", nullable = false), inverseJoinColumns = @JoinColumn(name = "FK_BRAND", nullable = false))
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "provider")
-    @JsonBackReference
+    @JsonManagedReference
     private Set<Brand> brand;
 
     public Provider() {

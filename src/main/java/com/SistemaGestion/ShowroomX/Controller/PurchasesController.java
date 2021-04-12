@@ -1,7 +1,7 @@
 package com.SistemaGestion.ShowroomX.Controller;
 
 import com.SistemaGestion.ShowroomX.Model.Purchases;
-import com.SistemaGestion.ShowroomX.Service.PurchaseService;
+import com.SistemaGestion.ShowroomX.Service.PurchaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping(value = "/purchases")
 public class PurchasesController {
 
-    private final PurchaseService purchaseService;
+    private final PurchaseServiceImpl purchaseService;
 
     @Autowired
-    public PurchasesController(PurchaseService purchaseService) {
+    public PurchasesController(PurchaseServiceImpl purchaseService) {
         this.purchaseService = purchaseService;
     }
 

@@ -24,8 +24,24 @@ public class Brand implements Serializable, Comparable<Brand> {
     private String name;
 
     @NotNull
-    @Column(name = "stock", nullable = false)
-    private int stock;
+    @Column(name = "stockXS", nullable = false)
+    private int stockXS;
+
+    @NotNull
+    @Column(name = "stockS", nullable = false)
+    private int stockS;
+
+    @NotNull
+    @Column(name = "stockM", nullable = false)
+    private int stockM;
+
+    @NotNull
+    @Column(name = "stockL", nullable = false)
+    private int stockL;
+
+    @NotNull
+    @Column(name = "stockXL", nullable = false)
+    private int stockXL;
 
     @NotNull
     @Column(name = "purchaseAmount", nullable = false)
@@ -38,9 +54,9 @@ public class Brand implements Serializable, Comparable<Brand> {
     @Column(name = "promotionSaleAmount")
     private double promotionSaleAmount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "FK_PROVIDER", nullable = false)
-    @JsonManagedReference
+    @JsonBackReference
     private Provider provider;
 
     @ManyToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -52,13 +68,18 @@ public class Brand implements Serializable, Comparable<Brand> {
     private Set<Promotions> promotions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonManagedReference
     private Set<Purchases> purchases;
 
-    public Brand(long idBrand, @NotNull String name, @NotNull int stock, @NotNull double purchaseAmount, @NotNull double unitSaleAmount, double promotionSaleAmount, Provider provider, Set<Sales> sales, Set<Promotions> promotions, Set<Purchases> purchases) {
+
+    public Brand(long idBrand, @NotNull String name, @NotNull int stockXS, @NotNull int stockS, @NotNull int stockM, @NotNull int stockL, @NotNull int stockXL, @NotNull double purchaseAmount, @NotNull double unitSaleAmount, double promotionSaleAmount, Provider provider, Set<Sales> sales, Set<Promotions> promotions, Set<Purchases> purchases) {
         this.idBrand = idBrand;
         this.name = name;
-        this.stock = stock;
+        this.stockXS = stockXS;
+        this.stockS = stockS;
+        this.stockM = stockM;
+        this.stockL = stockL;
+        this.stockXL = stockXL;
         this.purchaseAmount = purchaseAmount;
         this.unitSaleAmount = unitSaleAmount;
         this.promotionSaleAmount = promotionSaleAmount;
@@ -87,12 +108,44 @@ public class Brand implements Serializable, Comparable<Brand> {
         this.name = name;
     }
 
-    public int getStock() {
-        return stock;
+    public int getStockXS() {
+        return stockXS;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setStockXS(int stockXS) {
+        this.stockXS = stockXS;
+    }
+
+    public int getStockS() {
+        return stockS;
+    }
+
+    public void setStockS(int stockS) {
+        this.stockS = stockS;
+    }
+
+    public int getStockM() {
+        return stockM;
+    }
+
+    public void setStockM(int stockM) {
+        this.stockM = stockM;
+    }
+
+    public int getStockL() {
+        return stockL;
+    }
+
+    public void setStockL(int stockL) {
+        this.stockL = stockL;
+    }
+
+    public int getStockXL() {
+        return stockXL;
+    }
+
+    public void setStockXL(int stockXL) {
+        this.stockXL = stockXL;
     }
 
     public double getPurchaseAmount() {
@@ -170,7 +223,11 @@ public class Brand implements Serializable, Comparable<Brand> {
         return "Brand{" +
                 "idBrand=" + idBrand +
                 ", name='" + name + '\'' +
-                ", stock=" + stock +
+                ", stockXS=" + stockXS +
+                ", stockS=" + stockS +
+                ", stockM=" + stockM +
+                ", stockL=" + stockL +
+                ", stockXL=" + stockXL +
                 ", purchaseAmount=" + purchaseAmount +
                 ", unitSaleAmount=" + unitSaleAmount +
                 ", promotionSaleAmount=" + promotionSaleAmount +

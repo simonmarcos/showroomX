@@ -28,7 +28,7 @@ public class ProviderServiceTest extends TestCase {
     private IProvider providerRepository;
 
     @InjectMocks
-    private ProviderService providerService;
+    private ProviderServiceImpl providerService;
 
     @Test
     @Rollback
@@ -88,7 +88,7 @@ public class ProviderServiceTest extends TestCase {
         Provider provider_1 = this.getProviderWithAllFieldsOK();
         Provider provider_2 = this.getProviderWithAllFieldsOK();
 
-        Mockito.when(providerRepository.findAll((Pageable) PageRequest.of(0, 3))).thenReturn((Page<Provider>) Arrays.asList(provider_1, provider_2, provider_1));
+        Mockito.when(providerRepository.findAll(PageRequest.of(0, 3))).thenReturn((Page<Provider>) Arrays.asList(provider_1, provider_2, provider_1));
 
         List<Provider> listProvider = providerService.findAllPageable((Pageable) PageRequest.of(0, 3)).getContent();
         assertEquals(3, listProvider.size());

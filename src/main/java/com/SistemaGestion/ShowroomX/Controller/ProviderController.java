@@ -1,7 +1,7 @@
 package com.SistemaGestion.ShowroomX.Controller;
 
 import com.SistemaGestion.ShowroomX.Model.Provider;
-import com.SistemaGestion.ShowroomX.Service.ProviderService;
+import com.SistemaGestion.ShowroomX.Service.ProviderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,10 +16,10 @@ import java.util.List;
 @RequestMapping(value = "/provider")
 public class ProviderController {
 
-    private final ProviderService dao;
+    private final ProviderServiceImpl dao;
 
     @Autowired
-    public ProviderController(ProviderService providerService) {
+    public ProviderController(ProviderServiceImpl providerService) {
         this.dao = providerService;
     }
 
@@ -50,7 +50,6 @@ public class ProviderController {
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/findAll")
     public ResponseEntity<List<Provider>> findAll() {
-        System.out.println();
         return new ResponseEntity<>(dao.findAll(), HttpStatus.OK);
     }
 
@@ -67,7 +66,7 @@ public class ProviderController {
         Long response = dao.deleteByIdProvider(idProvider);
 
         ResponseEntity responseEntityOK = new ResponseEntity<>(response, HttpStatus.OK);
-        ResponseEntity responseEntityError = new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        ResponseEntity responseEntityError = new ResponseEntity("Se eliminó correctamente el Proveedor", HttpStatus.BAD_REQUEST);
 
         return response == 1 ? responseEntityOK : responseEntityError;
     }

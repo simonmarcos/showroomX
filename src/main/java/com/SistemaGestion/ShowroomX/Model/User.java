@@ -9,7 +9,7 @@ import java.util.Objects;
 public class User implements Serializable {
 
     @Id
-    @Column(name = "nameUser", length = 50)
+    @Column(name = "nameUser", length = 50, unique = true)
     private String nameUser;
 
     @Column(name = "password", length = 100)

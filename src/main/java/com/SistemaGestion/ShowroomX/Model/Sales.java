@@ -1,5 +1,6 @@
 package com.SistemaGestion.ShowroomX.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Sales implements Serializable, Comparable<Sales> {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_CLIENT", nullable = false)
-    @JsonIgnore
+    @JsonBackReference
     private Client client;
 
     @JoinTable(name = "BrandSales", joinColumns = @JoinColumn(name = "FK_SALES", nullable = false), inverseJoinColumns = @JoinColumn(name = "FK_BRAND", nullable = false))

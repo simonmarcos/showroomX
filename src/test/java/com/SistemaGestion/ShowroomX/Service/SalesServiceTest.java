@@ -24,7 +24,7 @@ public class SalesServiceTest {
     private ISales salesRepository;
 
     @InjectMocks
-    private SalesService salesService;
+    private SalesServiceImpl salesService;
 
     @Test
     public void TestFindByIdClient_OK() {

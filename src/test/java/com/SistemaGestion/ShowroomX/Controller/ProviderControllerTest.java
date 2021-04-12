@@ -1,7 +1,7 @@
 package com.SistemaGestion.ShowroomX.Controller;
 
 import com.SistemaGestion.ShowroomX.Model.Provider;
-import com.SistemaGestion.ShowroomX.Service.ProviderService;
+import com.SistemaGestion.ShowroomX.Service.ProviderServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class ProviderControllerTest {
 
     @Mock
-    private ProviderService providerService;
+    private ProviderServiceImpl providerService;
 
     @InjectMocks
     private final ProviderController providerController;

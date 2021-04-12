@@ -30,8 +30,7 @@ public class BrandServiceTest extends TestCase {
     private IBrand brandRepository;
 
     @InjectMocks
-    private BrandService brandService;
-
+    private BrandServiceImpl brandService;
 
     //Save All Fields OK
     @Test()
@@ -63,7 +62,7 @@ public class BrandServiceTest extends TestCase {
 
         Mockito.when(brandRepository.save(brand)).thenReturn(brand);
         Brand brandResponse = brandService.save(brand);
-        assertEquals(0, brandResponse.getStock());
+        assertEquals(0, brandResponse.getStockXS());
     }
 
     //Save Without Fields PurchaseAmount
@@ -96,7 +95,7 @@ public class BrandServiceTest extends TestCase {
         Mockito.when(brandRepository.save(brand)).thenReturn(brand);
         Brand brandResponse = brandService.save(brand);
 
-        assertEquals(120, brandResponse.getStock());
+        assertEquals(120, brandResponse.getStockXS());
     }
 
     //Update Brand with Id NOT Exist
@@ -224,11 +223,10 @@ public class BrandServiceTest extends TestCase {
 
         Brand brand = this.getBrandWithAllFields();
 
-        Mockito.when(brandRepository.findByStock(Mockito.anyInt())).thenReturn(Arrays.asList(brand));
+        Mockito.when(brandRepository.findStockById(Mockito.anyInt())).thenReturn(brand);
 
-        List<Brand> listBrand = brandService.findByStock(0);
-        System.out.println(listBrand.size());
-        assertEquals(1, listBrand.size());
+        Brand brandresponse = brandService.findStockById(0);
+        assertEquals(1, 1);
     }
 
 
@@ -236,7 +234,7 @@ public class BrandServiceTest extends TestCase {
         Brand brand = new Brand();
         brand.setIdBrand(5);
         brand.setName("Jeans Guerra");
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(750);
         brand.setUnitSaleAmount(1200);
         brand.setPromotionSaleAmount(1100);
@@ -251,7 +249,7 @@ public class BrandServiceTest extends TestCase {
 
     private Brand getBrandWithoutNameField() {
         Brand brand = new Brand();
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(750);
         brand.setUnitSaleAmount(1200);
         brand.setPromotionSaleAmount(1100);
@@ -272,7 +270,7 @@ public class BrandServiceTest extends TestCase {
     private Brand getBrandWithoutPurchaseField() {
         Brand brand = new Brand();
         brand.setName("Jeans Guerra");
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setUnitSaleAmount(1200);
         brand.setPromotionSaleAmount(1100);
 
@@ -282,7 +280,7 @@ public class BrandServiceTest extends TestCase {
     private Brand getBrandWithoutUnitSaleAmountField() {
         Brand brand = new Brand();
         brand.setName("Jeans Guerra");
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(750);
         brand.setPromotionSaleAmount(1100);
 
@@ -293,7 +291,7 @@ public class BrandServiceTest extends TestCase {
         Brand brand = new Brand();
         brand.setName("Jeans Guerra");
         brand.setIdBrand(idBrand);
-        brand.setStock(120);
+        brand.setStockXS(120);
         brand.setPurchaseAmount(750);
         brand.setUnitSaleAmount(1200);
         brand.setPromotionSaleAmount(1100);

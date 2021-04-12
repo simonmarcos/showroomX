@@ -19,7 +19,7 @@ public class UserServiceTest {
     private IUser userRepository;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Test
     public void Test_SaveUserWithAllFieldsOK() {
@@ -28,31 +28,20 @@ public class UserServiceTest {
         Mockito.when(userRepository.save(user)).thenReturn(user);
 
         User userResponse = userService.save(user);
-        System.out.println(userResponse.getPassword());
         Assert.assertEquals(user, userResponse);
     }
 
     @Test
     public void Test_SaveUserWithFieldsNameNOK() {
         User user = this.getUserWithFieldNameNOK();
-
-        Mockito.when(userRepository.save(user)).thenReturn(user);
-
         User userResponse = userService.save(user);
         Assert.assertNull(userResponse);
-    }
-
-    @Test
-    public void Test_FindUserWithAllPermission() {
-        this.getUserWithAllFieldsOK();
-
-
     }
 
 
     private User getUserWithAllFieldsOK() {
         User user = new User();
-        user.setNameUser("msimon123");
+        user.setNameUser("msimon");
         user.setPassword("simon");
         user.setStatus(true);
         user.setRoles("ADMIN");

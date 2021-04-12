@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClientService {
+public class ClientServiceImpl {
 
     private final IClient dao;
 
     @Autowired
-    public ClientService(IClient dao) {
+    public ClientServiceImpl(IClient dao) {
         this.dao = dao;
     }
 

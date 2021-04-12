@@ -25,7 +25,7 @@ public class BrandRepositoryTest extends TestCase {
     public void saveBrandWithValuesOKTest() {
         Brand brand = new Brand();
         brand.setName("Fernet Branca");
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(280);
         brand.setUnitSaleAmount(370);
         brand.setPromotionSaleAmount(350);
@@ -39,7 +39,7 @@ public class BrandRepositoryTest extends TestCase {
     public void saveBrandWithLengthNameLongExcepcionTest() {
         Brand brand = new Brand();
         brand.setName("Fernet Brancaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(280);
         brand.setUnitSaleAmount(370);
         brand.setPromotionSaleAmount(350);
@@ -52,7 +52,7 @@ public class BrandRepositoryTest extends TestCase {
     @Rollback
     public void saveBrandWithoutNameExceptionTest() {
         Brand brand = new Brand();
-        brand.setStock(100);
+        brand.setStockXS(100);
         brand.setPurchaseAmount(280);
         brand.setUnitSaleAmount(370);
         brand.setPromotionSaleAmount(350);

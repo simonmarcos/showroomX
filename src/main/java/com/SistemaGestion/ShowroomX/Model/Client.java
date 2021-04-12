@@ -1,8 +1,8 @@
 package com.SistemaGestion.ShowroomX.Model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,7 +38,7 @@ public class Client implements Serializable, Comparable<Client> {
     private Set<Brand> brand;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "client")
-    @JsonBackReference
+    @JsonManagedReference
     private Set<Sales> sales;
 
     public Client() {

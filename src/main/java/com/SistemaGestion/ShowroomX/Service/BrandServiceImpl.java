@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@Transactional
-public class BrandService {
+@Transactional
+public class BrandServiceImpl {
 
     private IBrand dao;
 
     @Autowired
-    public BrandService(IBrand dao) {
+    public BrandServiceImpl(IBrand dao) {
         this.dao = dao;
     }
 
@@ -58,18 +60,31 @@ public class BrandService {
     }
 
     public Brand update(Brand brand) {
-        if (brand.getPurchaseAmount() == 0 || brand.getStock() == 0 || brand.getUnitSaleAmount() == 0) {
+
+        if (brand.getPurchaseAmount() == 0 || brand.getUnitSaleAmount() == 0) {
             return null;
         }
-        try {
-            return dao.save(brand);
-        } catch (NullPointerException ex) {
-            return null;
-        }
-
+        return dao.save(brand);
     }
 
-    public List<Brand> findByStock(Integer stock) {
-        return dao.findByStock(stock);
+    public Brand findStockById(Integer id) {
+        return dao.findStockById(id);
     }
+
+    public List<Brand> findByStockZero() {
+
+        List<Brand> listBrand = new ArrayList<>();
+
+        //Foreach list obtain and filter by sum stock equals to zero
+        ((List<Brand>) dao.findAll())
+                .stream()
+                .forEach(b -> {
+                    if ((b.getStockS() + b.getStockXS() + b.getStockM() + b.getStockL() + b.getStockXL()) == 0) {
+                        listBrand.add(b);
+                    }
+                });
+
+        return listBrand;
+    }
+
 }
